@@ -6,8 +6,9 @@
   "scripts": {
     "test": "karma start",
     "start": "webpack-dev-server --inline --hot --content-base client/",
-    "dev-start": "webpack -d && node server/server.js & webpack --watch",
-    "prod-start": "webpack && PORT=80 forever start server/server.js"
+    "dev-start": "webpack -d && babel-node server/server.js & webpack --watch",
+    "prod-start": "webpack && PORT=80 forever start server/server.js",
+    "babel-node": "babel-node --presets=es2015"
   },
   "repository": {
     "type": "git",
@@ -21,7 +22,7 @@
   "homepage": "",
   "dependencies": {
     "autoprefixer": "^6.3.6",
-    "babel": "^6.1.18",
+    "babel-cli": "^6.8.0",
     "babel-core": "^6.2.1",
     "babel-loader": "^6.2.0",
     "babel-preset-es2015": "^6.1.18",
