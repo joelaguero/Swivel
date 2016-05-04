@@ -7,10 +7,12 @@ describe('Announcement Controller', () => {
   // });
 
   it('should successfully retrieve existing announcements', (done) => {
+    const req = { body: { courseId: 1 } };
     new Promise((resolve) => {
-      resolve(announcements.findAllByCourse(1));
+      resolve(announcements.findAllByCourse(req, {}));
     })
-    .then((result) => {
+    .then((res) => {
+      const result = JSON.parse(res).body.announcements;
       expect(result.length).toBeGreaterThan(0);
       expect(result[0].body.length).toBeGreaterThan(0);
       expect(result[0].title.length).toBeGreaterThan(0);

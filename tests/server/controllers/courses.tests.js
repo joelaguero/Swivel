@@ -1,4 +1,4 @@
-import { courses } from '../../../server/controllers/courses.js';
+import * as courses from '../../../server/controllers/courses.js';
 
 describe('Course Controller', () => {
   // it('should create new courses', (done) => {
@@ -7,35 +7,41 @@ describe('Course Controller', () => {
 
   describe('Retrieving courses', () => {
     it('should retrieve courses for a student', (done) => {
+      const req = { body: { courseId: 1 } };
+
       new Promise((resolve) => (
-        resolve(courses.findAllByStudent(1))
+        resolve(courses.findAllByStudent(req, {}))
       ))
-      .then((result) => {
+      .then((res) => {
+        const result = JSON.parse(res).body.assignments;
         expect(result.length).toBeGreaterThan(0);
         expect(result[0].name).toBeDefined();
         expect(result[0].description).toBeDefined();
         expect(result[0].department).toBeDefined();
+        done();
       })
       .catch((err) => {
         throw new Error(err);
       });
-      done();
     });
 
     it('should retrieve courses for a teacher', (done) => {
+      const req = { body: { courseId: 1 } };
+
       new Promise((resolve) => (
-        resolve(courses.findAllByTeacher(1))
+        resolve(courses.findAllByTeacher(req, {}))
       ))
-      .then((result) => {
+      .then((res) => {
+        const result = JSON.parse(res).body.courses;
         expect(result.length).toBeGreaterThan(0);
         expect(result[0].name).toBeDefined();
         expect(result[0].description).toBeDefined();
         expect(result[0].department).toBeDefined();
+        done();
       })
       .catch((err) => {
         throw new Error(err);
       });
-      done();
     });
   });
 
