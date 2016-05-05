@@ -6,6 +6,9 @@ describe('Student Controller', () => {
   // });
 
   it('should successfully retrieve existing students', (done) => {
+    new Promise((resolve) => {
+      resolve(students.findById(5))
+    }
     done();
   });
 
